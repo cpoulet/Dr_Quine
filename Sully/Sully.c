@@ -13,5 +13,6 @@ fprintf(fp,SULLY,10,10,34,SULLY,34,10,10,10,i,10,10,10,34,37,34,10,34,34,10,10,1
 fclose(fp);
 char *args[] = {"gcc",str,"-o","test",0};
 execv("/usr/bin/gcc", args);
+printf("HELLO WORLD\n");
 return(0);
 }
