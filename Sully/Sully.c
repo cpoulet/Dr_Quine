@@ -7,8 +7,11 @@ int i = 1;
 char str[16];
 if(i<=0)return(0);
 sprintf(str,"Sully_%d.c",--i);
-fprintf(fopen(str,"w"),SULLY,10,10,34,SULLY,34,10,10,10,i,10,10,10,34,37,34,10,34,34,10,10,10);
-char*args[] = {"-o","test", 0};
-execv("usr/bin/gcc", args);
+FILE *fp;
+fp = fopen(str,"w");
+fprintf(fp,SULLY,10,10,34,SULLY,34,10,10,10,i,10,10,10,34,37,34,10,34,34,10,10,10);
+fclose(fp);
+char *args[] = {"gcc",str,"-o","test",0};
+execv("/usr/bin/gcc", args);
 return(0);
 }
