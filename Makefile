@@ -26,19 +26,19 @@ S_OBJ   := $(addprefix $(O_PATH), $(S_SRC:.c=.o))
 
 FLAGS = -Wall -Wextra -Werror
 
-VPATH = src/
+vpath %.c src/
 
 .PHONY: all libft clean fclean re
 
 all : $(COLLEEN) $(GRACE) $(SULLY)
 
 $(O_PATH)%.o: %.c
-	@if ! [ -d $(O_PATH) ]; then mkdir $(O_PATH); fi
+	@mkdir -p $(O_PATH)
 	@gcc -c $< $(FLAGS) -o $@
 	@echo "Compiling [\x1B[1;32m$<\x1B[0m]\r"
 
 $(COLLEEN) : $(C_OBJ)
-	@if ! [ -d $(B_PATH) ]; then mkdir $(B_PATH); fi
+	@mkdir -p $(B_PATH)
 	@gcc $< $(FLAGS) -o $(B_PATH)/$@
 
 $(GRACE) : $(G_OBJ)
@@ -50,9 +50,8 @@ $(SULLY) : $(S_OBJ)
 	@gcc $< $(FLAGS) -o $(B_PATH)/$@
 
 clean :
-	@rm -f $(C_OBJ) $(G_OBJ) $(S_OBJ)
+	@rm -rf $(O_PATH)
 	@echo "\x1B[1;31mDeleting object files\x1B[0m"
-	@if [ -d $(O_PATH) ]; then rm -rf $(O_PATH); fi
 
 fclean : clean
 	@rm -Rf $(B_PATH)
